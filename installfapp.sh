@@ -63,9 +63,9 @@ SSLSessionCacheTimeout  300
     ErrorLog "/var/log/$MYDOMAINNAME-ssl-error.log"
     TransferLog "/var/log/$MYDOMAINNAME-ssl-access.log"
     SSLEngine on
-    SSLCertificateFile "/usr/local/apache/ssl/certificate.crt"
-    SSLCertificateKeyFile "/usr/local/apache/ssl/private.key"
-    SSLCertificateChainFile "/usr/local/apache/ssl/ca_bundle.crt"
+    SSLCertificateFile "/usr/local/etc/apache24/ssl/certificate.crt"
+    SSLCertificateKeyFile "/usr/local/etc/apache24/ssl/private.key"
+    SSLCertificateChainFile "/usr/local/etc/apache24/ssl/ca_bundle.crt"
     <FilesMatch "\.(cgi|shtml|phtml|php)\$">
         SSLOptions +StdEnvVars
     </FilesMatch>
@@ -113,10 +113,15 @@ sed -i '' -e 's,#LoadModule socache_shmcb_module libexec/apache24/mod_socache_sh
 sed -i '' -e 's,#LoadModule vhost_alias_module libexec/apache24/mod_vhost_alias.so,LoadModule vhost_alias_module libexec/apache24/mod_vhost_alias.so,g' 'httpd.conf'
 sed -i '' -e 's,#LoadModule rewrite_module libexec/apache24/mod_rewrite.so,LoadModule rewrite_module libexec/apache24/mod_rewrite.so,g' 'httpd.conf'
 sed -i '' -e "s,ServerAdmin you@example.com,ServerAdmin $MYDOMAINNAMEEMAIL,g" 'httpd.conf'
+sed -i '' -e 's,index.html,index.php index.html,g' 'httpd.conf'
 
 if ! [ -d $MYDOMAINNAMEPATH ]
 then
 mkdir $MYDOMAINNAMEPATH
 fi
-chmod 766 $MYDOMAINNAMEPATH
-    
+chmod 775 $MYDOMAINNAMEPATH
+if ! [ -f "$MYDOMAINNAMEPATH/index.php" ]
+then
+echo "It's working" >> $MYDOMAINNAMEPATH/index.php
+chmod 775 $MYDOMAINNAMEPATH/index.php
+fi
