@@ -114,5 +114,9 @@ sed -i '' -e 's,#LoadModule vhost_alias_module libexec/apache24/mod_vhost_alias.
 sed -i '' -e 's,#LoadModule rewrite_module libexec/apache24/mod_rewrite.so,LoadModule rewrite_module libexec/apache24/mod_rewrite.so,g' 'httpd.conf'
 sed -i '' -e "s,ServerAdmin you@example.com,ServerAdmin $MYDOMAINNAMEEMAIL,g" 'httpd.conf'
 
-    
+if ! [ -d $MYDOMAINNAMEPATH ]
+then
+mkdir $MYDOMAINNAMEPATH
+fi
+chmod 766 $MYDOMAINNAMEPATH
     
