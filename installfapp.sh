@@ -126,3 +126,6 @@ then
 echo "It's working" >> $MYDOMAINNAMEPATH/index.php
 chmod 775 $MYDOMAINNAMEPATH/index.php
 fi
+pkg install ImageMagick7
+pkg install p5-Image-ExifTool
+
