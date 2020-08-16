@@ -9,6 +9,7 @@ sysrc postgresql_enable=YES
 # /usr/local/bin/pg_ctl -D /var/db/postgres/data11 -l logfile start
 /usr/local/etc/rc.d/postgresql start 
 pkg install -y php74 php74-gd php74-geos php74-curl php74-mbstring php74-openssl php74-pspell php74-pgsql php74-xml php74-mysqli php74-iconv php74-exif php74-json php74-extensions mod_php74
+cp /usr/local/etc/php.ini-development /usr/local/etc/php.ini
 
 cat <<EOF >> /usr/local/etc/apache24/httpd.conf
 <FilesMatch "\.php\$">
